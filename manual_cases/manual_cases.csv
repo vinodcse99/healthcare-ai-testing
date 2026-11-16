@@ -1,0 +1,4 @@
+id,title,steps,expected
+TC001,Book appointment with past date,"Login as nurse1; open Appointments; enter patient Ravi Kumar; set date in the past; click Book","Appointment is rejected with a clear error message"
+TC002,Duplicate booking same patient same day,"Login; book Asha Verma for 2026-12-01 twice","Second booking is rejected or flagged as duplicate"
+TC003,Patient name with special characters,"Login; book appointment for patient O'Brien <script>; click Book","Name is saved safely and displayed escaped, no script executes"

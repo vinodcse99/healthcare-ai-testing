@@ -1,0 +1,30 @@
+name: Playwright Tests
+
+on:
+  pull_request:
+  schedule:
+    - cron: '30 20 * * *'   # nightly full regression
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx playwright install --with-deps
+      - name: Smoke tests on pull requests
+        if: github.event_name == 'pull_request'
+        run: npx playwright test --grep @smoke
+      - name: Full regression (nightly / manual)
+        if: github.event_name != 'pull_request'
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

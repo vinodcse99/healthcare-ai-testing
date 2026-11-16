@@ -1,0 +1,20 @@
+{
+  "name": "healthcare-ai-testing",
+  "version": "1.0.0",
+  "description": "AI-assisted Playwright + TypeScript test automation for a sample healthcare web app",
+  "scripts": {
+    "app": "node app/server.js",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "report": "playwright show-report"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}
